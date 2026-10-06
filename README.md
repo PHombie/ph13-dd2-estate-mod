@@ -1,3 +1,5 @@
+![The Warrens in DD2 Estate](docs/screenshots/warrens.jpg)
+
 # DD2 Estate
 
 A game mode for **Darkest Dungeon II** that plays like **Darkest Dungeon** (the first game): the Hamlet and its
@@ -79,3 +81,9 @@ mod that is off unless `[Dev] BridgePort` is set in `BepInEx\config\ph13.dd2.est
   authors.
 - Built with AI assistance ([Claude Code](https://claude.com/claude-code), with the
   [universal-modder](https://github.com/rehan-remade/universal-modder) toolkit).
+
+## Screenshots
+
+![A corridor of the Warrens, the bag open](docs/screenshots/warrens_corridors.jpg)
+
+![A hero's sheet and the Trinket Inventory in the Hamlet](docs/screenshots/estate_inventory.jpg)
