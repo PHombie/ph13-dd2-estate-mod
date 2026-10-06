@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Console test runner for src/DD2Estate/Core: no Unity, no game code, no NuGet packages.
+       Run with "dotnet run" on this project in Release; a DD1 install dir may follow as the first program argument. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>DD2Estate.CoreTests</RootNamespace>
+    <AssemblyName>CoreTests</AssemblyName>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <!-- run through "dotnet CoreTests.dll": no apphost pack to fetch -->
+    <UseAppHost>false</UseAppHost>
+    <NoWarn>$(NoWarn);MSB3277</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\src\DD2Estate\Core\**\*.cs" LinkBase="Core" />
+    <!-- the same Newtonsoft.Json the plugin runs against: the game's own copy, referenced from the install -->
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>$(ManagedDir)\Newtonsoft.Json.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+
+</Project>

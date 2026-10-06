@@ -1,0 +1,25 @@
+# derived / game-owned data — never commit
+_ref/
+_lab/
+bin/
+obj/
+# release archives made by tools/release.py
+dist/
+# assets/: only the redrawn Warrens pictures and their notice are kept in git (a demonstration: see
+# assets/dungeons/warrens/NOTICE.txt); working files, previews and reports beside them are not
+assets/*
+!assets/dungeons/
+assets/dungeons/*
+!assets/dungeons/warrens/
+assets/dungeons/warrens/*
+!assets/dungeons/warrens/*.png
+!assets/dungeons/warrens/NOTICE.txt
+*.user
+.vs/
+fal_manifest.jsonl
+Directory.Build.props.user
+__pycache__/
+*.pyc
+.claude/worktrees/
+# the owner's own working folder beside assets/ (source pictures, generator reports): never in git
+original/

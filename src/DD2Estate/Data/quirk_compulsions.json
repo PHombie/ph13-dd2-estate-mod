@@ -1,0 +1,52 @@
+{
+  "format": 1,
+  "notes": [
+    "DD1 quirks that make a hero act at a curio by themselves (shared/quirk/quirk_library.json: curio_tag, curio_tag_chance, keep_loot), and the DD2 quirk that stands for each. The numbers are never written here: they are read from the DD1 install by the DD1 quirk's id.",
+    "'on': true only where DD2 has the same quirk: the same name, or the same sentence of description. The others are the nearest DD2 quirk to a DD1 compulsion and are off: the owner may switch them on.",
+    "DD1 compulsions with no DD2 quirk at all: tapeworm (Food), guilty_conscience and hieromania and hagiomania (Worship), curious and compulsive (All), ablutomania (Fountain), dacnomania (Torture), egomania (Reflective), hylomania (Treasure), sitiomania (Food), paranormania (Haunted). The Shrieker's corvids_curiosity and corvids_appetite belong to a quest the estate does not have."
+  ],
+  "map": [
+    {
+      "dd2": "quirk_kleptomania_neg",
+      "dd1": "kleptomaniac",
+      "on": true,
+      "basis": "The same quirk: DD1 'Kleptomaniac: Prone to stealing items.', DD2 'Kleptomaniac: Consumed by the urge to steal.'"
+    },
+    {
+      "dd2": "quirk_dark_curiosity_neg",
+      "dd1": "dark_temptation",
+      "on": true,
+      "basis": "The same sentence in both games: 'Prone to investigating the Dark Arts.' (DD1 names it Dark Temptation, DD2 Darkly Curious)."
+    },
+    {
+      "dd2": "quirk_greed_neg",
+      "dd1": "plutomania",
+      "on": false,
+      "basis": "NEAREST, not the same quirk: DD2 'Greedy: Always focused on their share.', DD1 'Plutomania: Manic for money.' (DD1's Hylomania carries the same tag and chance)."
+    },
+    {
+      "dd2": "quirk_occultomania_neg",
+      "dd1": "demonomania",
+      "on": false,
+      "basis": "NEAREST, not the same quirk: DD2 'Occultomaniac: Enthralled with hidden cults and their trappings.', DD1 'Demonomania: Believes is possessed by demons.'"
+    },
+    {
+      "dd2": "quirk_tippler_neg",
+      "dd1": "dipsomania",
+      "on": false,
+      "basis": "NEAREST, not the same quirk: DD2 'Tippler: Can't get enough of the hard stuff.', DD1 'Dipsomania: Intense craving for alcohol.' (DD1's own Tippler is a town quirk without a curio tag)."
+    },
+    {
+      "dd2": "quirk_thanatomania_pos",
+      "dd1": "necromania",
+      "on": false,
+      "basis": "NEAREST, not the same quirk, and a positive one in DD2: 'Thanatomaniac: Obsessed with death and what lies beyond this mortal coil.', DD1 'Necromania: Fascinated with corpses.'"
+    },
+    {
+      "dd2": "quirk_bloodthirsty_pos",
+      "dd1": "bloodthirsty",
+      "on": false,
+      "basis": "THE NAME ONLY: DD2's Bloodthirsty is a positive combat quirk (+30% damage to the nearly dead), DD1's is 'Fascinated with injury, wounds, and torture.'"
+    }
+  ]
+}

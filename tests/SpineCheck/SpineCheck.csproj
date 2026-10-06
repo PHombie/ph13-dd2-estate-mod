@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Console check of src/DD2Estate/Dd1/SpineSkeleton.cs without Unity: the reader is the plugin's own file,
+       the few Unity and plugin types it touches are stand-ins (Program.cs). It writes every pose of every
+       skeleton under the given DD1 folders to a text file; tools/check_spine.py runs it and compares the
+       numbers with the Python reference reader of tools/preview_corridor.py. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>DD2Estate.SpineCheck</RootNamespace>
+    <AssemblyName>SpineCheck</AssemblyName>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <UseAppHost>false</UseAppHost>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\src\DD2Estate\Dd1\SpineSkeleton.cs" Link="SpineSkeleton.cs" />
+  </ItemGroup>
+
+</Project>

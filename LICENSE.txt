@@ -1,0 +1,82 @@
+================================================================================
+
+                                 DD2 ESTATE
+
+          a game mode for Darkest Dungeon II that plays like the first
+                               Darkest Dungeon
+
+================================================================================
+
+
+  1.  WHAT BELONGS TO RED HOOK
+  ----------------------------
+
+  Darkest Dungeon and Darkest Dungeon II, their names and logos, their art,
+  animation, music, sound, voice, writing, characters, monsters, places, rules
+  and data, and everything else that makes those games what they are, belong
+  to Red Hook Studios Inc.  All rights to them are Red Hook's.
+
+  This mod is a fan work.  It is not made, endorsed or supported by Red Hook
+  Studios, and it is not affiliated with them in any way.
+
+  The mod contains no files of either game.  It does not include, replace or
+  redistribute them.  Whatever it shows of Darkest Dungeon (the first game) is
+  read, while the game runs, from the copy of Darkest Dungeon that you own and
+  have installed; whatever it shows of Darkest Dungeon II comes from the game
+  it runs in.  You need to own both games to play it.
+
+  Nothing in this file gives anyone any right to Red Hook's work.
+
+
+  2.  WHAT IS THE MOD'S OWN, AND WHAT YOU MAY DO WITH IT
+  ------------------------------------------------------
+
+  The mod's own work is the source code in this repository, its build files,
+  its tools, its tests, its data tables and its notes.
+
+  With that you may do anything you like.  Use it, copy it, change it, break
+  it, fix it, merge it into something else, publish it, sell it, rename it.
+  You need not ask, you need not give credit, and you need not keep this file.
+  The author does not mind.
+
+  In formal words:
+
+      Permission to use, copy, modify, and/or distribute this software for
+      any purpose with or without fee is hereby granted.
+
+      THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+      WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+      MERCHANTABILITY AND FITNESS.  IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+      ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+      WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+      ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+      OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+  That last paragraph matters: the mod changes how a game saves and loads.
+  Play it on a profile you can afford to lose, or keep backups.
+
+
+  3.  THE PICTURES IN assets/
+  ---------------------------
+
+  The folder assets/dungeons/warrens holds a few redrawn textures of one dungeon.
+  They were made from Red Hook's original Darkest Dungeon art and exist only
+  as a demonstration of how the mod can show replacement pictures.  All rights
+  to the originals are Red Hook's; section 2 does not apply to these pictures.
+  See the NOTICE.txt beside them.
+
+
+  4.  WHAT THE MOD LEANS ON
+  -------------------------
+
+  The mod is loaded by BepInEx and patches the game with Harmony.  Neither is
+  included here; each has its own licence, which you will find with it.
+
+
+  5.  HOW IT WAS MADE
+  -------------------
+
+  The mod was written with the help of an AI model (Claude, by Anthropic),
+  directed, played and judged by a human.
+
+================================================================================

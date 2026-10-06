@@ -1,0 +1,34 @@
+================================================================================
+
+                THE PICTURES IN THIS FOLDER: A DEMONSTRATION ONLY
+
+================================================================================
+
+  The PNG files beside this notice are redrawn environment textures for the
+  Warrens.
+
+  They were made from the original art of Darkest Dungeon by Red Hook Studios:
+  each one keeps the subject, layout and silhouettes of the original picture
+  of the same name and repaints it, with an image-generation tool, in a manner
+  closer to Darkest Dungeon II.
+
+  ALL RIGHTS TO THE ORIGINAL ART BELONG TO RED HOOK STUDIOS INC.
+
+  These pictures are not Red Hook's work, are not endorsed by Red Hook, and
+  are not offered as a replacement for it.  They are here for one purpose
+  only: to show that the mod can draw a picture of its own in place of one of
+  the original game's, at the original's size, whatever its pixels.  The
+  "anything you like" of the mod's LICENSE.txt does not cover them.
+
+  The mod does not need them.  Delete this folder and the mod draws the
+  Warrens from the copy of Darkest Dungeon you own, exactly as it draws every
+  other place.
+
+  How the mod uses them: a PNG at  assets/<the picture's path in the Darkest
+  Dungeon install>  is read instead of the original file.  The build copies
+  assets/ beside the plugin.
+
+  If you hold rights in the originals and want these pictures gone, they will
+  be removed.
+
+================================================================================

@@ -1,0 +1,1565 @@
+{
+  "format": 1,
+  "dd2_version": "2.04.85095",
+  "host_game_type": "kingdom",
+  "tier_rules": {
+    "apprentice": {
+      "dd1_difficulty": 1, "hero_level": 1, "escalation": 1,
+      "scaling": {
+        "hallway": {"hp": 0, "dmg": 0, "dot": 0, "speed": 0, "crit": 0},
+        "room": {"hp": 0, "dmg": 0, "dot": 0, "speed": 0, "crit": 0},
+        "boss": {"hp": 0, "dmg": 0, "dot": 0, "speed": 0, "crit": 0}
+      }
+    },
+    "veteran": {
+      "dd1_difficulty": 3, "hero_level": 3, "escalation": 2,
+      "scaling": {
+        "hallway": {"hp": 0.2, "dmg": 0, "dot": 0, "speed": 1, "crit": 0.05},
+        "room": {"hp": 0.6, "dmg": 0.4, "dot": 0.4, "speed": 1, "crit": 0.05},
+        "boss": {"hp": 0.65, "dmg": 0.45, "dot": 0.45, "speed": 1, "crit": 0.05}
+      }
+    },
+    "champion": {
+      "dd1_difficulty": 5, "hero_level": 5, "escalation": 3,
+      "scaling": {
+        "hallway": {"hp": 1.05, "dmg": 0.65, "dot": 0.65, "speed": 2, "crit": 0.065},
+        "room": {"hp": 1.5, "dmg": 1.25, "dot": 1.25, "speed": 2, "crit": 0.065},
+        "boss": {"hp": 1.75, "dmg": 1.4, "dot": 1.4, "speed": 2, "crit": 0.065}
+      }
+    },
+    "darkest": {
+      "dd1_difficulty": 6, "hero_level": 6, "escalation": 3,
+      "scaling": {
+        "hallway": {"hp": 1.4, "dmg": 1.1, "dot": 1.1, "speed": 2, "crit": 0.065},
+        "room": {"hp": 1.3, "dmg": 1.5, "dot": 1.5, "speed": 2, "crit": 0.065},
+        "boss": {"hp": 1.1, "dmg": 1.4, "dot": 1.4, "speed": 2, "crit": 0.065}
+      }
+    }
+  },
+  "battle_loot": {
+    "notes": "What a won fight pays, in DD1's loot table codes (Core/BattleLoot.cs draws them from the player's DD1 loot/*.json). DD1 writes the code and count into every monster's own file (monsters/*/*.info.darkest, loot: .code .count): A x1 for an ordinary monster (109 files), A x2 for one that stands on two ranks (21: ghoul, bone captain, swinetaur, unclean giant, large slime, crab, big carrion eater), T x2 for a quest's boss (23), nothing for what a boss summons and for every monster of the Darkest Dungeon. DD2's monsters have no such line: this block is that rule for them. An enemy is large by DD2's own size of its class (m_Size) from min_size on; one the fight is won without beating (DD2's m_IsBattleComplete: cover, a barricade, a corpse) pays nothing, as DD1's props and corpses do. In a boss fight the boss pays once and everything listed with the boss (actor_ids, escort_actor_ids) pays nothing. 'enemies' names exceptions by DD2 actor id ({\"code\": \"NONE\", \"count\": 0} for one that leaves nothing). In the dark DD1 adds the draws of loot/darkness_overrides.loot.json under darkness_key. tests/CoreTests/BattleLootTests.cs holds the numbers against DD1's files.",
+    "enemy": {"code": "A", "count": 1},
+    "large_enemy": {"code": "A", "count": 2, "min_size": 2},
+    "boss": {"code": "T", "count": 2},
+    "darkness_key": "battle",
+    "no_loot_dungeons": ["darkestdungeon"],
+    "enemies": {},
+    "bosses_notes": "A boss that pays something of its own in place of 'boss', by the mod's boss id: the loot lines of its DD1 monster's file. DD1's Collector (monsters/collector): COLLECTOR x1 (a trapezohedron three times in four, else one of the Collector's own trinkets). DD1's Shambler (monsters/shambler): SHAMBLER x1 (one of its own trinkets), B x3, T x1. The wanderers DD1 has no monster for pay as a quest's boss does (a GUESS).",
+    "bosses": {
+      "collector": [{"code": "COLLECTOR", "count": 1}],
+      "shambler": [{"code": "SHAMBLER", "count": 1}, {"code": "B", "count": 3}, {"code": "T", "count": 1}]
+    }
+  },
+  "dungeons": [
+    {
+      "id": "crypts",
+      "name": "Ruins",
+      "dd1_art": "crypts",
+      "confession": {"act": "brain", "reason": "Denial: the house where he refused to read what the books plainly said."},
+      "unlock": {
+        "quests_completed": 0,
+        "requires": []
+      },
+      "factions": [
+        {
+          "id": "fanatic",
+          "weight": 5,
+          "lore": "The hamlet's mob that stormed the manor with torches and never went home; they burn whatever is written."
+        },
+        {"id": "gaunt", "weight": 3, "lore": "Tenants and servants hollowed out by hunger and by what they saw in the house."},
+        {"id": "cultist", "weight": 2, "lore": "Diggers who came back up from the deepest shaft with a creed; they keep chapel in the family crypt."}
+      ],
+      "arenas": {
+        "hallway": ["combat_arena_forest_dungeon_interior"],
+        "room": ["combat_arena_forest_dungeon_interior", "combat_arena_city_dungeon_interior"]
+      },
+      "tiers": {
+        "apprentice": {
+          "ordain": null,
+          "hallway": {
+            "configs": [
+              "fanatic_mash_101", "fanatic_mash_102", "fanatic_mash_103", "fanatic_mash_104", "fanatic_mash_105", "fanatic_mash_107",
+              "gaunt_mash_1", "gaunt_mash_2", "gaunt_mash_3", "im_just_a_ghoul"
+            ],
+            "tables": [],
+            "weights": {
+              "fanatic_mash_101": 50, "fanatic_mash_102": 50, "fanatic_mash_103": 50, "fanatic_mash_104": 50, "fanatic_mash_105": 50,
+              "fanatic_mash_107": 50, "gaunt_mash_1": 45, "gaunt_mash_2": 45, "gaunt_mash_3": 45, "im_just_a_ghoul": 45
+            }
+          },
+          "room": {
+            "configs": ["gaunt_mash_4", "gaunt_mash_5", "gaunt_mash_6", "gaunt_mash_7", "gaunt_mash_8", "gaunt_mash_13"],
+            "tables": ["fanatic_mashes_normal", "cultist_mashes_normal"],
+            "weights": {
+              "fanatic_mashes_normal": 300, "gaunt_mash_4": 30, "gaunt_mash_5": 30, "gaunt_mash_6": 30, "gaunt_mash_7": 30, "gaunt_mash_8": 30,
+              "gaunt_mash_13": 30, "cultist_mashes_normal": 120
+            }
+          }
+        },
+        "veteran": {
+          "ordain": {"boss_modifier": "brain_boss_typical_biome_2", "chance": 0.25},
+          "hallway": {
+            "configs": ["gaunt_mash_9", "gaunt_mash_10", "gaunt_mash_11", "gaunt_mash_12"],
+            "tables": ["fanatic_mashes_normal", "cultist_mashes_normal"],
+            "weights": {
+              "fanatic_mashes_normal": 300, "gaunt_mash_9": 45, "gaunt_mash_10": 45, "gaunt_mash_11": 45, "gaunt_mash_12": 45,
+              "cultist_mashes_normal": 120
+            }
+          },
+          "room": {
+            "configs": ["gaunt_ghoul_normal_1", "gaunt_ghoul_normal_2", "gaunt_ghoul_normal_3"],
+            "tables": ["fanatic_mashes_hard", "fanatic_mashes_normal_champions", "cultist_mashes_hard", "cultist_mashes_normal_enhanced"],
+            "weights": {
+              "fanatic_mashes_hard": 200, "fanatic_mashes_normal_champions": 100, "gaunt_ghoul_normal_1": 60, "gaunt_ghoul_normal_2": 60,
+              "gaunt_ghoul_normal_3": 60, "cultist_mashes_hard": 80, "cultist_mashes_normal_enhanced": 40
+            }
+          }
+        },
+        "champion": {
+          "ordain": {"boss_modifier": "brain_boss_typical_biome_3", "chance": 0.33},
+          "hallway": {
+            "configs": ["gaunt_ghoul_normal_1", "gaunt_ghoul_normal_2", "gaunt_ghoul_normal_3"],
+            "tables": ["fanatic_mashes_hard", "fanatic_mashes_normal_champions", "cultist_mashes_hard", "cultist_mashes_normal_enhanced"],
+            "weights": {
+              "fanatic_mashes_hard": 200, "fanatic_mashes_normal_champions": 100, "gaunt_ghoul_normal_1": 60, "gaunt_ghoul_normal_2": 60,
+              "gaunt_ghoul_normal_3": 60, "cultist_mashes_hard": 80, "cultist_mashes_normal_enhanced": 40
+            }
+          },
+          "room": {
+            "configs": ["gaunt_ghoul_hard_1", "gaunt_ghoul_hard_2", "gaunt_ghoul_hard_3", "gaunt_ghoul_hard_4", "gaunt_ghoul_hard_5"],
+            "tables": ["fanatic_mashes_hard_champions", "fanatic_mashes_brutal_champions", "cultist_mashes_hard_enhanced", "cultist_mashes_brutal_enhanced"],
+            "weights": {
+              "fanatic_mashes_hard_champions": 225, "fanatic_mashes_brutal_champions": 75, "gaunt_ghoul_hard_1": 36, "gaunt_ghoul_hard_2": 36,
+              "gaunt_ghoul_hard_3": 36, "gaunt_ghoul_hard_4": 36, "gaunt_ghoul_hard_5": 36, "cultist_mashes_hard_enhanced": 90,
+              "cultist_mashes_brutal_enhanced": 30
+            }
+          }
+        }
+      },
+      "bosses": [
+        {
+          "id": "librarian",
+          "dd1_slot": "necromancer",
+          "name": "The Librarian",
+          "actor_ids": ["fanatic_librarian", "fanatic_librarian_ignited", "fanatic_librarian_stack_l", "fanatic_librarian_stack_m", "fanatic_librarian_stack_s"],
+          "escort_actor_ids": [],
+          "tags": ["boss", "biome_boss"],
+          "guards": [],
+          "dlc": null,
+          "tiers": {
+            "apprentice": {
+              "config": null,
+              "config_table": "biome_city_dungeon_round3",
+              "chains_to": [],
+              "arena": "combat_arena_city_dungeon_interior",
+              "arena_source": "config_override",
+              "escort_tables": [],
+              "escort_native_chain": false,
+              "escort_arena": null,
+              "boss_modifier": null,
+              "external_buffs": null,
+              "battle_modifier": null,
+              "notes": "Boss room only, vanilla stats. The config applies hero effect lair_midfight_heal (15% heal at the start) and is no_retreat."
+            },
+            "veteran": {
+              "config": null,
+              "config_table": "biome_city_dungeon_round3",
+              "chains_to": [],
+              "arena": "combat_arena_city_dungeon_interior",
+              "arena_source": "config_override",
+              "escort_tables": ["biome_city_dungeon_round2_normal"],
+              "escort_native_chain": true,
+              "escort_arena": "combat_arena_city_dungeon_interior",
+              "boss_modifier": "brain_infernal_flame_lair_boss_biome_2",
+              "external_buffs": "brain_blessing_biome_2",
+              "battle_modifier": null,
+              "notes": "Start with one fight from the escort table; it chains into the boss by itself (m_NextBattleConfiguration*, m_IsNextBattleOptional). Boss ordained with the region-2 blessing."
+            },
+            "champion": {
+              "config": null,
+              "config_table": "biome_city_dungeon_round3",
+              "chains_to": [],
+              "arena": "combat_arena_city_dungeon_interior",
+              "arena_source": "config_override",
+              "escort_tables": ["biome_city_dungeon_round2_champions"],
+              "escort_native_chain": true,
+              "escort_arena": "combat_arena_city_dungeon_interior",
+              "boss_modifier": "brain_infernal_flame_lair_boss_biome_3",
+              "external_buffs": "brain_blessing_biome_3",
+              "battle_modifier": null,
+              "notes": "Champion escort wave, then the boss ordained with the region-3 blessing."
+            }
+          },
+          "notes": "City lair boss. Four book-stack layouts (city_dungeon_3_a..d) picked by the table; he ignites into fanatic_librarian_ignited mid-fight."
+        },
+        {
+          "id": "exemplar",
+          "dd1_slot": "prophet",
+          "name": "The Exemplar",
+          "actor_ids": ["cultist_exemplar", "cultist_altar", "cultist_cherub", "cultist_evangelist", "cultist_herald"],
+          "escort_actor_ids": [],
+          "tags": ["boss", "biome_boss"],
+          "guards": [],
+          "dlc": null,
+          "tiers": {
+            "apprentice": {
+              "config": "tundra_dungeon_3",
+              "config_table": null,
+              "chains_to": [],
+              "arena": "combat_arena_tundra_dungeon_interior",
+              "arena_source": "config_override",
+              "escort_tables": [],
+              "escort_native_chain": false,
+              "escort_arena": null,
+              "boss_modifier": null,
+              "external_buffs": null,
+              "battle_modifier": null,
+              "notes": "Boss room only, vanilla stats. The config applies hero effect lair_midfight_heal (15% heal at the start) and is no_retreat."
+            },
+            "veteran": {
+              "config": "tundra_dungeon_3",
+              "config_table": null,
+              "chains_to": [],
+              "arena": "combat_arena_tundra_dungeon_interior",
+              "arena_source": "config_override",
+              "escort_tables": ["biome_tundra_dungeon_round2_normal"],
+              "escort_native_chain": true,
+              "escort_arena": "combat_arena_tundra_dungeon_exterior",
+              "boss_modifier": "brain_infernal_flame_lair_boss_biome_2",
+              "external_buffs": "brain_blessing_biome_2",
+              "battle_modifier": null,
+              "notes": "Start with one fight from the escort table; it chains into the boss by itself (m_NextBattleConfiguration*, m_IsNextBattleOptional). Boss ordained with the region-2 blessing."
+            },
+            "champion": {
+              "config": "tundra_dungeon_3",
+              "config_table": null,
+              "chains_to": [],
+              "arena": "combat_arena_tundra_dungeon_interior",
+              "arena_source": "config_override",
+              "escort_tables": ["biome_tundra_dungeon_round2_enhanced"],
+              "escort_native_chain": true,
+              "escort_arena": "combat_arena_tundra_dungeon_exterior",
+              "boss_modifier": "brain_infernal_flame_lair_boss_biome_3",
+              "external_buffs": "brain_blessing_biome_3",
+              "battle_modifier": null,
+              "notes": "Champion escort wave, then the boss ordained with the region-3 blessing."
+            }
+          },
+          "notes": "Tundra lair boss (Kingdoms data). cultist_exemplar/altar/deacon/cardinal are defined only in Excel/expedition and Excel/kingdom; under the mod's kingdom host the kingdom copy loads (HP 145, tag biome_boss). The two tundra round-2 tables hold the same seven fights, so champion differs from veteran by blessing only."
+        }
+      ],
+      "dlc_extras": [
+        {
+          "dlc": "dlc_catacombs",
+          "factions": [
+            {
+              "id": "vermin",
+              "weight": 2,
+              "lore": "The family vaults under the manor: the caretakers never stopped interring, and the dead have gone soft."
+            }
+          ],
+          "arenas": {
+            "hallway": ["combat_arena_catacombs_faction", "combat_arena_catacombs_gaunt"],
+            "room": ["combat_arena_catacombs_faction", "combat_arena_catacombs_resist"]
+          },
+          "tiers": {
+            "apprentice": {
+              "room": {
+                "configs": [],
+                "tables": ["vermin_mashes_normal"],
+                "weights": {"vermin_mashes_normal": 120}
+              }
+            },
+            "veteran": {
+              "hallway": {
+                "configs": [],
+                "tables": ["vermin_mashes_normal"],
+                "weights": {"vermin_mashes_normal": 120}
+              },
+              "room": {
+                "configs": [],
+                "tables": ["vermin_mashes_hard"],
+                "weights": {"vermin_mashes_hard": 120}
+              }
+            },
+            "champion": {
+              "hallway": {
+                "configs": [],
+                "tables": ["vermin_mashes_hard"],
+                "weights": {"vermin_mashes_hard": 120}
+              },
+              "room": {
+                "configs": [],
+                "tables": ["vermin_mashes_brutal"],
+                "weights": {"vermin_mashes_brutal": 120}
+              }
+            }
+          },
+          "notes": "Vermin fights add hero effect add_slime_drip_spawner_token; several hard/brutal configs carry m_RunLimit 1."
+        }
+      ]
+    },
+    {
+      "id": "weald",
+      "name": "Weald",
+      "dd1_art": "weald",
+      "confession": {"act": "lungs", "reason": "Resentment: every creditor he cheated is still waiting under these trees."},
+      "unlock": {
+        "quests_completed": 3,
+        "requires": []
+      },
+      "factions": [
+        {"id": "lost_battalion", "weight": 4, "lore": "The free company he hired to hold the roads, marched into the wood unpaid and never relieved."},
+        {"id": "pillager", "weight": 3, "lore": "Deserters and scavengers stripping the estate, camped where the bailiffs will not go."},
+        {"id": "coven", "weight": 2, "lore": "The wood's herb-women, who sold him the knitting of flesh and were paid in tenants."},
+        {"id": "beast", "weight": 2, "lore": "Spiders, rabid dogs and carrion birds fattened on everything the others leave."},
+        {"id": "gaunt", "weight": 1, "lore": "Woodcutters and their families who waited too long to leave."}
+      ],
+      "arenas": {
+        "hallway": ["combat_arena_forest_faction", "combat_arena_forest_gaunt", "combat_arena_forest_pillager"],
+        "room": [
+          "combat_arena_forest_resist", "combat_arena_forest_creature_den", "combat_arena_forest_dungeon_exterior",
+          "combat_arena_forest_barricade_gang_coven"
+        ]
+      },
+      "tiers": {
+        "apprentice": {
+          "ordain": null,
+          "hallway": {
+            "configs": [
+              "lost_battalion_mash_102", "lost_battalion_mash_104", "pillager_mash_101", "pillager_mash_102", "pillager_mash_103",
+              "pillager_mash_104", "pillager_mash_105", "pillager_mash_106", "valley_coven_siege", "classic_spiders", "webslingers",
+              "gaunt_mash_1", "gaunt_mash_2", "gaunt_mash_3", "im_just_a_ghoul"
+            ],
+            "tables": ["coven_quest_mothers_familiar_spider_mashes"],
+            "weights": {
+              "lost_battalion_mash_102": 120, "lost_battalion_mash_104": 120, "pillager_mash_101": 30, "pillager_mash_102": 30,
+              "pillager_mash_103": 30, "pillager_mash_104": 30, "pillager_mash_105": 30, "pillager_mash_106": 30, "valley_coven_siege": 120,
+              "classic_spiders": 40, "webslingers": 40, "coven_quest_mothers_familiar_spider_mashes": 40, "gaunt_mash_1": 15,
+              "gaunt_mash_2": 15, "gaunt_mash_3": 15, "im_just_a_ghoul": 15
+            }
+          },
+          "room": {
+            "configs": ["beasts_302", "jaws_and_paws", "gaunt_mash_4", "gaunt_mash_5", "gaunt_mash_6", "gaunt_mash_7", "gaunt_mash_8", "gaunt_mash_13"],
+            "tables": ["lost_battalion_mashes_normal", "pillager_mashes_normal", "coven_quest_assist_iscoven_mashes"],
+            "weights": {
+              "lost_battalion_mashes_normal": 240, "pillager_mashes_normal": 180, "coven_quest_assist_iscoven_mashes": 120, "beasts_302": 60,
+              "jaws_and_paws": 60, "gaunt_mash_4": 10, "gaunt_mash_5": 10, "gaunt_mash_6": 10, "gaunt_mash_7": 10, "gaunt_mash_8": 10,
+              "gaunt_mash_13": 10
+            }
+          }
+        },
+        "veteran": {
+          "ordain": {"boss_modifier": "lungs_boss_typical_biome_2", "chance": 0.33},
+          "hallway": {
+            "configs": ["beasts_302", "jaws_and_paws", "gaunt_mash_9", "gaunt_mash_10", "gaunt_mash_11", "gaunt_mash_12"],
+            "tables": ["lost_battalion_mashes_normal", "pillager_mashes_normal", "coven_mashes_siege_easy"],
+            "weights": {
+              "lost_battalion_mashes_normal": 240, "pillager_mashes_normal": 180, "coven_mashes_siege_easy": 120, "beasts_302": 60,
+              "jaws_and_paws": 60, "gaunt_mash_9": 15, "gaunt_mash_10": 15, "gaunt_mash_11": 15, "gaunt_mash_12": 15
+            }
+          },
+          "room": {
+            "configs": [
+              "beasts_301", "carrion_my_wayward_son", "carrion_my_wayward_son_2", "bark_and_mark_c", "gaunt_ghoul_normal_1",
+              "gaunt_ghoul_normal_2", "gaunt_ghoul_normal_3"
+            ],
+            "tables": [
+              "lost_battalion_mashes_hard", "lost_battalion_mashes_normal_champions", "military_forest_mashes", "pillager_mashes_hard",
+              "coven_mashes_siege_normal"
+            ],
+            "weights": {
+              "lost_battalion_mashes_hard": 120, "lost_battalion_mashes_normal_champions": 60, "military_forest_mashes": 60,
+              "pillager_mashes_hard": 180, "coven_mashes_siege_normal": 120, "beasts_301": 30, "carrion_my_wayward_son": 30,
+              "carrion_my_wayward_son_2": 30, "bark_and_mark_c": 30, "gaunt_ghoul_normal_1": 20, "gaunt_ghoul_normal_2": 20,
+              "gaunt_ghoul_normal_3": 20
+            }
+          }
+        },
+        "champion": {
+          "ordain": {"boss_modifier": "lungs_boss_typical_biome_3", "chance": 0.75},
+          "hallway": {
+            "configs": [
+              "beasts_301", "carrion_my_wayward_son", "carrion_my_wayward_son_2", "bark_and_mark_c", "gaunt_ghoul_normal_1",
+              "gaunt_ghoul_normal_2", "gaunt_ghoul_normal_3"
+            ],
+            "tables": ["lost_battalion_mashes_hard", "lost_battalion_mashes_normal_champions", "pillager_mashes_hard", "coven_mashes_siege_normal"],
+            "weights": {
+              "lost_battalion_mashes_hard": 160, "lost_battalion_mashes_normal_champions": 80, "pillager_mashes_hard": 180,
+              "coven_mashes_siege_normal": 120, "beasts_301": 30, "carrion_my_wayward_son": 30, "carrion_my_wayward_son_2": 30,
+              "bark_and_mark_c": 30, "gaunt_ghoul_normal_1": 20, "gaunt_ghoul_normal_2": 20, "gaunt_ghoul_normal_3": 20
+            }
+          },
+          "room": {
+            "configs": [
+              "jaws_and_paws_c", "jaws_and_paws_2_c", "rabies_train_c", "rabies_train_2_c", "carrion_my_wayward_son_c", "gaunt_ghoul_hard_1",
+              "gaunt_ghoul_hard_2", "gaunt_ghoul_hard_3", "gaunt_ghoul_hard_4", "gaunt_ghoul_hard_5"
+            ],
+            "tables": [
+              "lost_battalion_mashes_hard_champions", "lost_battalion_mashes_brutal_champions", "pillager_mashes_hard",
+              "coven_mashes_siege_hard", "coven_quest_boss_region_mashes"
+            ],
+            "weights": {
+              "lost_battalion_mashes_hard_champions": 180, "lost_battalion_mashes_brutal_champions": 60, "pillager_mashes_hard": 180,
+              "coven_mashes_siege_hard": 90, "coven_quest_boss_region_mashes": 30, "jaws_and_paws_c": 24, "jaws_and_paws_2_c": 24,
+              "rabies_train_c": 24, "rabies_train_2_c": 24, "carrion_my_wayward_son_c": 24, "gaunt_ghoul_hard_1": 12, "gaunt_ghoul_hard_2": 12,
+              "gaunt_ghoul_hard_3": 12, "gaunt_ghoul_hard_4": 12, "gaunt_ghoul_hard_5": 12
+            }
+          }
+        }
+      },
+      "bosses": [
+        {
+          "id": "mother_of_threads",
+          "dd1_slot": "hag",
+          "name": "Mother of Threads",
+          "actor_ids": ["coven_matres_sequelae", "coven_mothers_spitter", "coven_mothers_mushroom"],
+          "escort_actor_ids": [],
+          "tags": ["boss", "gang_boss"],
+          "guards": ["gang_boss_tag"],
+          "dlc": null,
+          "tiers": {
+            "apprentice": {
+              "config": "coven_boss",
+              "config_table": null,
+              "chains_to": [],
+              "arena": "combat_arena_forest_boss_coven",
+              "arena_source": "mod",
+              "escort_tables": [],
+              "escort_native_chain": false,
+              "escort_arena": null,
+              "boss_modifier": null,
+              "external_buffs": null,
+              "battle_modifier": null,
+              "notes": "Boss alone, vanilla stats, no_retreat. No arena override in the config: pass `arena`."
+            },
+            "veteran": {
+              "config": "coven_boss",
+              "config_table": null,
+              "chains_to": [],
+              "arena": "combat_arena_forest_boss_coven",
+              "arena_source": "mod",
+              "escort_tables": ["coven_quest_boss_region_mashes"],
+              "escort_native_chain": false,
+              "escort_arena": null,
+              "boss_modifier": null,
+              "external_buffs": "lungs_blessing_biome_2",
+              "battle_modifier": "battlemodifier_coven_2",
+              "notes": "Kingdoms boss-approach fight first (no native chain: the mod sequences it), then the boss. gang_boss actors match no BossModifier tag list, so attach `external_buffs` directly and force `battle_modifier` (its vanilla conditions need is_kingdoms + this gang + escalation 2)."
+            },
+            "champion": {
+              "config": "coven_boss",
+              "config_table": null,
+              "chains_to": [],
+              "arena": "combat_arena_forest_boss_coven",
+              "arena_source": "mod",
+              "escort_tables": ["coven_mashes_siege_hard"],
+              "escort_native_chain": false,
+              "escort_arena": null,
+              "boss_modifier": null,
+              "external_buffs": "lungs_blessing_biome_3",
+              "battle_modifier": "battlemodifier_coven_3",
+              "notes": "Hard siege wave first (it forces its own battlemodifier), then the boss with the escalation-3 gang modifier and the region-3 blessing buffs."
+            }
+          },
+          "notes": "Kingdoms coven gang boss (Forest is its vanilla boss region)."
+        },
+        {
+          "id": "dreaming_general",
+          "dd1_slot": "brigand_cannon",
+          "name": "The Dreaming General",
+          "actor_ids": ["lost_battalion_boss_dreaming_general", "lost_battalion_boss_taproot"],
+          "escort_actor_ids": [],
+          "tags": ["boss", "biome_boss"],
+          "guards": [],
+          "dlc": null,
+          "tiers": {
+            "apprentice": {
+              "config": "forest_dungeon_3",
+              "config_table": null,
+              "chains_to": [],
+              "arena": "combat_arena_forest_dungeon_interior",
+              "arena_source": "config_override",
+              "escort_tables": [],
+              "escort_native_chain": false,
+              "escort_arena": null,
+              "boss_modifier": null,
+              "external_buffs": null,
+              "battle_modifier": null,
+              "notes": "Boss room only, vanilla stats. The config applies hero effect lair_midfight_heal (15% heal at the start) and is no_retreat."
+            },
+            "veteran": {
+              "config": "forest_dungeon_3",
+              "config_table": null,
+              "chains_to": [],
+              "arena": "combat_arena_forest_dungeon_interior",
+              "arena_source": "config_override",
+              "escort_tables": ["biome_forest_dungeon_round2_normal"],
+              "escort_native_chain": true,
+              "escort_arena": "combat_arena_forest_dungeon_interior",
+              "boss_modifier": "lungs_infernal_flame_lair_boss_biome_2",
+              "external_buffs": "lungs_blessing_biome_2",
+              "battle_modifier": null,
+              "notes": "Start with one fight from the escort table; it chains into the boss by itself (m_NextBattleConfiguration*, m_IsNextBattleOptional). Boss ordained with the region-2 blessing."
+            },
+            "champion": {
+              "config": "forest_dungeon_3",
+              "config_table": null,
+              "chains_to": [],
+              "arena": "combat_arena_forest_dungeon_interior",
+              "arena_source": "config_override",
+              "escort_tables": ["biome_forest_dungeon_round2_champions"],
+              "escort_native_chain": true,
+              "escort_arena": "combat_arena_forest_dungeon_interior",
+              "boss_modifier": "lungs_infernal_flame_lair_boss_biome_3",
+              "external_buffs": "lungs_blessing_biome_3",
+              "battle_modifier": null,
+              "notes": "Champion escort wave, then the boss ordained with the region-3 blessing."
+            }
+          },
+          "notes": "Forest lair boss. The Tap Root death-chains to the General (kill the root, the General dies)."
+        }
+      ]
+    },
+    {
+      "id": "warrens",
+      "name": "Warrens",
+      "dd1_art": "warrens",
+      "confession": {"act": "arms", "reason": "Ambition: the pens where he tried to make life answer to him."},
+      "unlock": {
+        "quests_completed": 4,
+        "requires": []
+      },
+      "factions": [
+        {"id": "swine", "weight": 5, "lore": "What he made under the aqueduct when he tried to give the thing below a body."},
+        {"id": "plague_eater", "weight": 3, "lore": "The hamlet's gentry, who bought the carcasses cheap in a hungry year and acquired the taste."},
+        {
+          "id": "beastmen",
+          "weight": 2,
+          "lore": "His huntsmen and kennel-men, sent down to herd the swine until they could not be told apart from them."
+        },
+        {"id": "gaunt", "weight": 1, "lore": "The labourers who dug the pens and were shut in with the stock."}
+      ],
+      "arenas": {
+        "hallway": ["combat_arena_caves_faction", "combat_arena_caves_gaunt"],
+        "room": ["combat_arena_caves_resist", "combat_arena_caves_creature_den"]
+      },
+      "tiers": {
+        "apprentice": {
+          "ordain": null,
+          "hallway": {
+            "configs": [
+              "swine_mash_101", "swine_mash_102", "plague_eater_mash_102", "plague_eater_mash_103", "plague_eater_mash_104",
+              "valley_beastmen_siege", "beastmen_alpha_barricade_102", "gaunt_mash_1", "gaunt_mash_2", "gaunt_mash_3", "im_just_a_ghoul"
+            ],
+            "tables": [],
+            "weights": {
+              "swine_mash_101": 150, "swine_mash_102": 150, "plague_eater_mash_102": 60, "plague_eater_mash_103": 60,
+              "plague_eater_mash_104": 60, "valley_beastmen_siege": 60, "beastmen_alpha_barricade_102": 60, "gaunt_mash_1": 15,
+              "gaunt_mash_2": 15, "gaunt_mash_3": 15, "im_just_a_ghoul": 15
+            }
+          },
+          "room": {
+            "configs": ["gaunt_mash_4", "gaunt_mash_5", "gaunt_mash_6", "gaunt_mash_7", "gaunt_mash_8", "gaunt_mash_13"],
+            "tables": ["swine_mashes_normal", "plague_eater_mashes_normal", "beastmen_mashes_siege_easy"],
+            "weights": {
+              "swine_mashes_normal": 300, "plague_eater_mashes_normal": 180, "beastmen_mashes_siege_easy": 120, "gaunt_mash_4": 10,
+              "gaunt_mash_5": 10, "gaunt_mash_6": 10, "gaunt_mash_7": 10, "gaunt_mash_8": 10, "gaunt_mash_13": 10
+            }
+          }
+        },
+        "veteran": {
+          "ordain": {"boss_modifier": "arms_boss_typical_biome_2", "chance": 0.5},
+          "hallway": {
+            "configs": ["gaunt_mash_9", "gaunt_mash_10", "gaunt_mash_11", "gaunt_mash_12"],
+            "tables": ["swine_mashes_normal", "plague_eater_mashes_normal", "beastmen_mashes_siege_easy"],
+            "weights": {
+              "swine_mashes_normal": 300, "plague_eater_mashes_normal": 180, "beastmen_mashes_siege_easy": 120, "gaunt_mash_9": 15,
+              "gaunt_mash_10": 15, "gaunt_mash_11": 15, "gaunt_mash_12": 15
+            }
+          },
+          "room": {
+            "configs": [
+              "beastmen_siege_201", "beastmen_siege_202", "beastmen_siege_203", "beastmen_siege_204", "beastmen_siege_205",
+              "beastmen_siege_206", "gaunt_ghoul_normal_1", "gaunt_ghoul_normal_2", "gaunt_ghoul_normal_3"
+            ],
+            "tables": ["swine_mashes_hard", "swine_mashes_normal_champions", "plague_eater_mashes_hard", "plague_eater_mashes_normal_champions"],
+            "weights": {
+              "swine_mashes_hard": 200, "swine_mashes_normal_champions": 100, "plague_eater_mashes_hard": 120,
+              "plague_eater_mashes_normal_champions": 60, "beastmen_siege_201": 20, "beastmen_siege_202": 20, "beastmen_siege_203": 20,
+              "beastmen_siege_204": 20, "beastmen_siege_205": 20, "beastmen_siege_206": 20, "gaunt_ghoul_normal_1": 20,
+              "gaunt_ghoul_normal_2": 20, "gaunt_ghoul_normal_3": 20
+            }
+          }
+        },
+        "champion": {
+          "ordain": {"boss_modifier": "arms_boss_typical_biome_3", "chance": 0.9},
+          "hallway": {
+            "configs": [
+              "beastmen_siege_201", "beastmen_siege_202", "beastmen_siege_203", "beastmen_siege_204", "beastmen_siege_205",
+              "beastmen_siege_206", "gaunt_ghoul_normal_1", "gaunt_ghoul_normal_2", "gaunt_ghoul_normal_3"
+            ],
+            "tables": ["swine_mashes_hard", "swine_mashes_normal_champions", "plague_eater_mashes_hard", "plague_eater_mashes_normal_champions"],
+            "weights": {
+              "swine_mashes_hard": 200, "swine_mashes_normal_champions": 100, "plague_eater_mashes_hard": 120,
+              "plague_eater_mashes_normal_champions": 60, "beastmen_siege_201": 20, "beastmen_siege_202": 20, "beastmen_siege_203": 20,
+              "beastmen_siege_204": 20, "beastmen_siege_205": 20, "beastmen_siege_206": 20, "gaunt_ghoul_normal_1": 20,
+              "gaunt_ghoul_normal_2": 20, "gaunt_ghoul_normal_3": 20
+            }
+          },
+          "room": {
+            "configs": ["gaunt_ghoul_hard_1", "gaunt_ghoul_hard_2", "gaunt_ghoul_hard_3", "gaunt_ghoul_hard_4", "gaunt_ghoul_hard_5"],
+            "tables": [
+              "swine_mashes_hard_champions", "swine_mashes_brutal_champions", "plague_eater_mashes_hard_champions",
+              "plague_eater_mashes_brutal_champions", "beastmen_mashes_siege_hard", "beastmen_quest_boss_region_mashes"
+            ],
+            "weights": {
+              "swine_mashes_hard_champions": 225, "swine_mashes_brutal_champions": 75, "plague_eater_mashes_hard_champions": 135,
+              "plague_eater_mashes_brutal_champions": 45, "beastmen_mashes_siege_hard": 90, "beastmen_quest_boss_region_mashes": 30,
+              "gaunt_ghoul_hard_1": 12, "gaunt_ghoul_hard_2": 12, "gaunt_ghoul_hard_3": 12, "gaunt_ghoul_hard_4": 12, "gaunt_ghoul_hard_5": 12
+            }
+          }
+        }
+      },
+      "bosses": [
+        {
+          "id": "meat_hook",
+          "dd1_slot": "swine_prince",
+          "name": "Meat Hook",
+          "actor_ids": ["beastmen_meat_hook", "beastmen_meat_post"],
+          "escort_actor_ids": [],
+          "tags": ["boss", "gang_boss"],
+          "guards": ["gang_boss_tag"],
+          "dlc": null,
+          "tiers": {
+            "apprentice": {
+              "config": "beastmen_boss",
+              "config_table": null,
+              "chains_to": [],
+              "arena": "combat_arena_farm_boss_beastmen",
+              "arena_source": "mod",
+              "escort_tables": [],
+              "escort_native_chain": false,
+              "escort_arena": null,
+              "boss_modifier": null,
+              "external_buffs": null,
+              "battle_modifier": null,
+              "notes": "Boss alone, vanilla stats, no_retreat. No arena override in the config: pass `arena`."
+            },
+            "veteran": {
+              "config": "beastmen_boss",
+              "config_table": null,
+              "chains_to": [],
+              "arena": "combat_arena_farm_boss_beastmen",
+              "arena_source": "mod",
+              "escort_tables": ["beastmen_quest_boss_region_mashes"],
+              "escort_native_chain": false,
+              "escort_arena": null,
+              "boss_modifier": null,
+              "external_buffs": "generic_blessing_biome_2",
+              "battle_modifier": "battlemodifier_beastmen_2",
+              "notes": "Kingdoms boss-approach fight first (no native chain: the mod sequences it), then the boss. gang_boss actors match no BossModifier tag list, so attach `external_buffs` directly and force `battle_modifier` (its vanilla conditions need is_kingdoms + this gang + escalation 2)."
+            },
+            "champion": {
+              "config": "beastmen_boss",
+              "config_table": null,
+              "chains_to": [],
+              "arena": "combat_arena_farm_boss_beastmen",
+              "arena_source": "mod",
+              "escort_tables": ["beastmen_mashes_siege_hard"],
+              "escort_native_chain": false,
+              "escort_arena": null,
+              "boss_modifier": null,
+              "external_buffs": "generic_blessing_biome_3",
+              "battle_modifier": "battlemodifier_beastmen_3",
+              "notes": "Hard siege wave first (it forces its own battlemodifier), then the boss with the escalation-3 gang modifier and the region-3 blessing buffs."
+            }
+          },
+          "notes": "Kingdoms beastmen gang boss. Vanilla boss region is Tundra (combat_arena_tundra_boss_beastmen); city/coast/farm/forest variants of the arena exist, farm is used as the closest to the Warrens."
+        },
+        {
+          "id": "harvest_child",
+          "dd1_slot": "formless_flesh",
+          "name": "The Harvest Child",
+          "actor_ids": ["plague_eater_harvest_table", "plague_eater_harvest_fetid_meat", "plague_eater_harvest_putrid_meat"],
+          "escort_actor_ids": [],
+          "tags": ["boss", "biome_boss"],
+          "guards": [],
+          "dlc": null,
+          "tiers": {
+            "apprentice": {
+              "config": "farm_dungeon_3",
+              "config_table": null,
+              "chains_to": [],
+              "arena": "combat_arena_farm_dungeon_interior",
+              "arena_source": "config_override",
+              "escort_tables": [],
+              "escort_native_chain": false,
+              "escort_arena": null,
+              "boss_modifier": null,
+              "external_buffs": null,
+              "battle_modifier": null,
+              "notes": "Boss room only, vanilla stats. The config applies hero effect lair_midfight_heal (15% heal at the start) and is no_retreat."
+            },
+            "veteran": {
+              "config": "farm_dungeon_3",
+              "config_table": null,
+              "chains_to": [],
+              "arena": "combat_arena_farm_dungeon_interior",
+              "arena_source": "config_override",
+              "escort_tables": ["biome_farm_dungeon_round2_normal"],
+              "escort_native_chain": true,
+              "escort_arena": "combat_arena_farm_dungeon_interior",
+              "boss_modifier": "arms_infernal_flame_lair_boss_biome_2",
+              "external_buffs": "generic_blessing_biome_2",
+              "battle_modifier": null,
+              "notes": "Start with one fight from the escort table; it chains into the boss by itself (m_NextBattleConfiguration*, m_IsNextBattleOptional). Boss ordained with the region-2 blessing."
+            },
+            "champion": {
+              "config": "farm_dungeon_3",
+              "config_table": null,
+              "chains_to": [],
+              "arena": "combat_arena_farm_dungeon_interior",
+              "arena_source": "config_override",
+              "escort_tables": ["biome_farm_dungeon_round2_champions"],
+              "escort_native_chain": true,
+              "escort_arena": "combat_arena_farm_dungeon_interior",
+              "boss_modifier": "arms_infernal_flame_lair_boss_biome_3",
+              "external_buffs": "generic_blessing_biome_3",
+              "battle_modifier": null,
+              "notes": "Champion escort wave, then the boss ordained with the region-3 blessing."
+            }
+          },
+          "notes": "Farm lair boss. The two meat piles are tagged `meat`, so the lair ordainment rows bless them as well."
+        }
+      ]
+    },
+    {
+      "id": "cove",
+      "name": "Cove",
+      "dd1_art": "cove",
+      "confession": {"act": "eyes", "reason": "Obsession: the shore he could not stop returning to, whatever the tide asked."},
+      "unlock": {
+        "quests_completed": 4,
+        "requires": []
+      },
+      "factions": [
+        {"id": "coastal", "weight": 6, "lore": "The dockers and smugglers who landed his cargoes, drowned in the fog and kept their shifts."},
+        {"id": "courtier", "weight": 3, "lore": "Guests of his last revels, who drank the wrong vintage, fled by barge and washed back in."},
+        {"id": "gaunt", "weight": 1, "lore": "Fisherfolk with nothing left to sell the sea."}
+      ],
+      "arenas": {
+        "hallway": ["combat_arena_coast_faction", "combat_arena_coast_gaunt"],
+        "room": [
+          "combat_arena_coast_resist", "combat_arena_coast_creature_den", "combat_arena_coast_dungeon_exterior",
+          "combat_arena_coast_barricade_gang_courtier"
+        ]
+      },
+      "tiers": {
+        "apprentice": {
+          "ordain": null,
+          "hallway": {
+            "configs": [
+              "coastal_mash_101", "coastal_mash_102", "coastal_mash_103", "coastal_mash_104", "coastal_mash_106", "coastal_mash_107",
+              "coastal_mash_108", "coastal_mash_109", "coastal_mash_110", "coastal_mash_111", "coastal_mash_112", "coastal_mash_113",
+              "coastal_mash_114", "valley_courtier_siege", "gaunt_mash_1", "gaunt_mash_2", "gaunt_mash_3", "im_just_a_ghoul"
+            ],
+            "tables": [],
+            "weights": {
+              "coastal_mash_101": 28, "coastal_mash_102": 28, "coastal_mash_103": 28, "coastal_mash_104": 28, "coastal_mash_106": 28,
+              "coastal_mash_107": 28, "coastal_mash_108": 28, "coastal_mash_109": 28, "coastal_mash_110": 28, "coastal_mash_111": 28,
+              "coastal_mash_112": 28, "coastal_mash_113": 28, "coastal_mash_114": 28, "valley_courtier_siege": 180, "gaunt_mash_1": 15,
+              "gaunt_mash_2": 15, "gaunt_mash_3": 15, "im_just_a_ghoul": 15
+            }
+          },
+          "room": {
+            "configs": ["gaunt_mash_4", "gaunt_mash_5", "gaunt_mash_6", "gaunt_mash_7", "gaunt_mash_8", "gaunt_mash_13"],
+            "tables": ["coastal_mashes_normal", "courtier_mashes_siege_easy"],
+            "weights": {
+              "coastal_mashes_normal": 360, "courtier_mashes_siege_easy": 180, "gaunt_mash_4": 10, "gaunt_mash_5": 10, "gaunt_mash_6": 10,
+              "gaunt_mash_7": 10, "gaunt_mash_8": 10, "gaunt_mash_13": 10
+            }
+          }
+        },
+        "veteran": {
+          "ordain": {"boss_modifier": "eyes_boss_typical_biome_2", "chance": 0.4},
+          "hallway": {
+            "configs": ["gaunt_mash_9", "gaunt_mash_10", "gaunt_mash_11", "gaunt_mash_12"],
+            "tables": ["coastal_mashes_normal", "courtier_mashes_siege_easy"],
+            "weights": {
+              "coastal_mashes_normal": 360, "courtier_mashes_siege_easy": 180, "gaunt_mash_9": 15, "gaunt_mash_10": 15, "gaunt_mash_11": 15,
+              "gaunt_mash_12": 15
+            }
+          },
+          "room": {
+            "configs": ["gaunt_ghoul_normal_1", "gaunt_ghoul_normal_2", "gaunt_ghoul_normal_3"],
+            "tables": ["coastal_mashes_hard", "coastal_mashes_normal_champions", "courtier_mashes_siege_normal"],
+            "weights": {
+              "coastal_mashes_hard": 240, "coastal_mashes_normal_champions": 120, "courtier_mashes_siege_normal": 180,
+              "gaunt_ghoul_normal_1": 20, "gaunt_ghoul_normal_2": 20, "gaunt_ghoul_normal_3": 20
+            }
+          }
+        },
+        "champion": {
+          "ordain": {"boss_modifier": "eyes_boss_typical_biome_3", "chance": 0.8},
+          "hallway": {
+            "configs": ["gaunt_ghoul_normal_1", "gaunt_ghoul_normal_2", "gaunt_ghoul_normal_3"],
+            "tables": ["coastal_mashes_hard", "coastal_mashes_normal_champions", "courtier_mashes_siege_normal"],
+            "weights": {
+              "coastal_mashes_hard": 240, "coastal_mashes_normal_champions": 120, "courtier_mashes_siege_normal": 180,
+              "gaunt_ghoul_normal_1": 20, "gaunt_ghoul_normal_2": 20, "gaunt_ghoul_normal_3": 20
+            }
+          },
+          "room": {
+            "configs": ["gaunt_ghoul_hard_1", "gaunt_ghoul_hard_2", "gaunt_ghoul_hard_3", "gaunt_ghoul_hard_4", "gaunt_ghoul_hard_5"],
+            "tables": ["coastal_mashes_hard_champions", "coastal_mashes_brutal_champions", "courtier_mashes_siege_hard", "courtier_quest_boss_region_mashes"],
+            "weights": {
+              "coastal_mashes_hard_champions": 270, "coastal_mashes_brutal_champions": 90, "courtier_mashes_siege_hard": 135,
+              "courtier_quest_boss_region_mashes": 45, "gaunt_ghoul_hard_1": 12, "gaunt_ghoul_hard_2": 12, "gaunt_ghoul_hard_3": 12,
+              "gaunt_ghoul_hard_4": 12, "gaunt_ghoul_hard_5": 12
+            }
+          }
+        }
+      },
+      "bosses": [
+        {
+          "id": "leviathan",
+          "dd1_slot": "siren",
+          "name": "The Leviathan",
+          "actor_ids": ["coastal_boss_leviathan", "coastal_boss_leviathan_hand"],
+          "escort_actor_ids": [],
+          "tags": ["boss", "biome_boss"],
+          "guards": [],
+          "dlc": null,
+          "tiers": {
+            "apprentice": {
+              "config": "coast_dungeon_3",
+              "config_table": null,
+              "chains_to": [],
+              "arena": "combat_arena_coast_dungeon_interior",
+              "arena_source": "config_override",
+              "escort_tables": [],
+              "escort_native_chain": false,
+              "escort_arena": null,
+              "boss_modifier": null,
+              "external_buffs": null,
+              "battle_modifier": null,
+              "notes": "Boss room only, vanilla stats. The config applies hero effect lair_midfight_heal (15% heal at the start) and is no_retreat."
+            },
+            "veteran": {
+              "config": "coast_dungeon_3",
+              "config_table": null,
+              "chains_to": [],
+              "arena": "combat_arena_coast_dungeon_interior",
+              "arena_source": "config_override",
+              "escort_tables": ["biome_coast_dungeon_round2_normal"],
+              "escort_native_chain": true,
+              "escort_arena": "combat_arena_coast_dungeon_exterior",
+              "boss_modifier": "eyes_infernal_flame_lair_boss_biome_2",
+              "external_buffs": "generic_blessing_biome_2",
+              "battle_modifier": null,
+              "notes": "Start with one fight from the escort table; it chains into the boss by itself (m_NextBattleConfiguration*, m_IsNextBattleOptional). Boss ordained with the region-2 blessing."
+            },
+            "champion": {
+              "config": "coast_dungeon_3",
+              "config_table": null,
+              "chains_to": [],
+              "arena": "combat_arena_coast_dungeon_interior",
+              "arena_source": "config_override",
+              "escort_tables": ["biome_coast_dungeon_round2_champions"],
+              "escort_native_chain": true,
+              "escort_arena": "combat_arena_coast_dungeon_exterior",
+              "boss_modifier": "eyes_infernal_flame_lair_boss_biome_3",
+              "external_buffs": "generic_blessing_biome_3",
+              "battle_modifier": null,
+              "notes": "Champion escort wave, then the boss ordained with the region-3 blessing."
+            }
+          },
+          "notes": "Coast lair boss. The summoned hands are tagged boss_hand and get the same ordainment."
+        },
+        {
+          "id": "archduke",
+          "dd1_slot": "drowned_crew",
+          "name": "The Archduke",
+          "actor_ids": ["courtier_archduke", "courtier_banquet", "courtier_chevalier", "courtier_esquire", "courtier_sycophant", "courtier_swarm"],
+          "escort_actor_ids": [],
+          "tags": ["boss", "gang_boss"],
+          "guards": ["gang_boss_tag"],
+          "dlc": null,
+          "tiers": {
+            "apprentice": {
+              "config": "courtier_boss",
+              "config_table": null,
+              "chains_to": [],
+              "arena": "combat_arena_coast_boss_courtier",
+              "arena_source": "mod",
+              "escort_tables": [],
+              "escort_native_chain": false,
+              "escort_arena": null,
+              "boss_modifier": null,
+              "external_buffs": null,
+              "battle_modifier": null,
+              "notes": "Boss alone, vanilla stats, no_retreat. No arena override in the config: pass `arena`."
+            },
+            "veteran": {
+              "config": "courtier_boss",
+              "config_table": null,
+              "chains_to": [],
+              "arena": "combat_arena_coast_boss_courtier",
+              "arena_source": "mod",
+              "escort_tables": ["courtier_quest_boss_region_mashes"],
+              "escort_native_chain": false,
+              "escort_arena": null,
+              "boss_modifier": null,
+              "external_buffs": "generic_blessing_biome_2",
+              "battle_modifier": "battlemodifier_courtier_2",
+              "notes": "Kingdoms boss-approach fight first (no native chain: the mod sequences it), then the boss. gang_boss actors match no BossModifier tag list, so attach `external_buffs` directly and force `battle_modifier` (its vanilla conditions need is_kingdoms + this gang + escalation 2)."
+            },
+            "champion": {
+              "config": "courtier_boss",
+              "config_table": null,
+              "chains_to": [],
+              "arena": "combat_arena_coast_boss_courtier",
+              "arena_source": "mod",
+              "escort_tables": ["courtier_mashes_siege_hard"],
+              "escort_native_chain": false,
+              "escort_arena": null,
+              "boss_modifier": null,
+              "external_buffs": "generic_blessing_biome_3",
+              "battle_modifier": "battlemodifier_courtier_3",
+              "notes": "Hard siege wave first (it forces its own battlemodifier), then the boss with the escalation-3 gang modifier and the region-3 blessing buffs."
+            }
+          },
+          "notes": "Kingdoms courtier gang boss (Coast is its vanilla boss region). Summons his court during the fight."
+        }
+      ]
+    },
+    {
+      "id": "darkestdungeon",
+      "name": "Darkest Dungeon",
+      "dd1_art": "darkestdungeon",
+      "confession": {"act": "final", "reason": "Cowardice: what he found at the bottom, and ran from."},
+      "unlock": {
+        "quests_completed": 0,
+        "requires": [
+          "plot_librarian_1", "plot_exemplar_1", "plot_mother_of_threads_1", "plot_dreaming_general_1", "plot_meat_hook_1",
+          "plot_harvest_child_1", "plot_leviathan_1", "plot_archduke_1"
+        ]
+      },
+      "factions": [
+        {"id": "cultist", "weight": 1, "lore": "The congregation of the thing below, at home at last."}
+      ],
+      "arenas": {
+        "hallway": ["combat_arena_mountain_story_cultist"],
+        "room": ["combat_arena_mountain_story_cultist", "combat_arena_stressworld"]
+      },
+      "tiers": {
+        "darkest": {
+          "ordain": {"boss_modifier": "final_boss_typical_biome_3", "chance": 0.9},
+          "hallway": {
+            "configs": [],
+            "tables": ["cultist_mashes_hard", "cultist_mashes_normal_enhanced"],
+            "weights": {"cultist_mashes_hard": 40, "cultist_mashes_normal_enhanced": 20}
+          },
+          "room": {
+            "configs": [],
+            "tables": [
+              "cultist_mashes_hard_enhanced", "cultist_mashes_brutal_enhanced", "cultist_mashes_mountain_1_confessions",
+              "cultist_mashes_mountain_2_confessions"
+            ],
+            "weights": {
+              "cultist_mashes_hard_enhanced": 22, "cultist_mashes_brutal_enhanced": 8, "cultist_mashes_mountain_1_confessions": 15,
+              "cultist_mashes_mountain_2_confessions": 15
+            }
+          }
+        }
+      },
+      "bosses": [
+        {
+          "id": "shackles_of_denial",
+          "run_boss": "brain",
+          "dd1_slot": "darkest_dungeon_1",
+          "name": "Shackles of Denial",
+          "actor_ids": ["boss_brain_lock_melee", "boss_brain_lock_health", "boss_brain_lock_ranged", "boss_brain_lock_stress"],
+          "escort_actor_ids": [],
+          "tags": ["boss", "end_boss"],
+          "guards": ["end_boss_tag", "end_sequence"],
+          "dlc": null,
+          "tiers": {
+            "darkest": {
+              "config": null,
+              "config_table": "mountain_boss_table_brain",
+              "chains_to": [],
+              "arena": "combat_arena_mountain_boss_brain",
+              "arena_source": "config_override",
+              "escort_tables": [],
+              "escort_native_chain": false,
+              "escort_arena": null,
+              "boss_modifier": null,
+              "external_buffs": null,
+              "battle_modifier": null,
+              "notes": "Act 1 boss, reused as is. The table picks one of five lock orderings. Configs set m_HasEndSequence (5 s end sequence)."
+            }
+          },
+          "notes": "Four locks, 55 HP each."
+        },
+        {
+          "id": "seething_sigh",
+          "run_boss": "lungs",
+          "dd1_slot": "darkest_dungeon_2",
+          "name": "Seething Sigh",
+          "actor_ids": ["boss_lungs_core", "boss_lungs_front", "boss_lungs_back"],
+          "escort_actor_ids": [],
+          "tags": ["boss", "end_boss"],
+          "guards": ["end_boss_tag"],
+          "dlc": null,
+          "tiers": {
+            "darkest": {
+              "config": "mountain_boss_lungs",
+              "config_table": null,
+              "chains_to": [],
+              "arena": "combat_arena_mountain_boss_lungs",
+              "arena_source": "config_override",
+              "escort_tables": [],
+              "escort_native_chain": false,
+              "escort_arena": null,
+              "boss_modifier": null,
+              "external_buffs": null,
+              "battle_modifier": null,
+              "notes": "Act 2 boss, reused as is."
+            }
+          },
+          "notes": "Front and back lung death-chain to the core."
+        },
+        {
+          "id": "focused_fault",
+          "run_boss": "eyes",
+          "dd1_slot": "darkest_dungeon_3",
+          "name": "Focused Fault",
+          "actor_ids": ["boss_eyes", "boss_eyes_stalk_l", "boss_eyes_stalk_m", "boss_eyes_stalk_s"],
+          "escort_actor_ids": [],
+          "tags": ["boss", "end_boss"],
+          "guards": ["end_boss_tag"],
+          "dlc": null,
+          "tiers": {
+            "darkest": {
+              "config": "mountain_boss_eyes",
+              "config_table": null,
+              "chains_to": ["mountain_boss_table_eyes_phase_2"],
+              "arena": "combat_arena_mountain_boss_eyes",
+              "arena_source": "config_override",
+              "escort_tables": [],
+              "escort_native_chain": false,
+              "escort_arena": null,
+              "boss_modifier": null,
+              "external_buffs": null,
+              "battle_modifier": null,
+              "notes": "Act 3 boss, reused as is. Intended chain: the stalk phase rolls mountain_boss_table_eyes_phase_2 (mountain_boss_eyes_phase_2, the 250 HP eye) as its additional wave."
+            }
+          },
+          "notes": "Two phases in one battle."
+        },
+        {
+          "id": "ravenous_reach",
+          "run_boss": "arms",
+          "dd1_slot": "darkest_dungeon_3",
+          "name": "Ravenous Reach",
+          "actor_ids": ["boss_arms_phase1", "boss_arms_phase2", "boss_arms_phase3"],
+          "escort_actor_ids": [],
+          "tags": ["boss", "end_boss"],
+          "guards": ["end_boss_tag"],
+          "dlc": null,
+          "tiers": {
+            "darkest": {
+              "config": "mountain_boss_arms",
+              "config_table": null,
+              "chains_to": [],
+              "arena": "combat_arena_mountain_boss_arms",
+              "arena_source": "config_override",
+              "escort_tables": [],
+              "escort_native_chain": false,
+              "escort_arena": null,
+              "boss_modifier": null,
+              "external_buffs": null,
+              "battle_modifier": null,
+              "notes": "Act 4 boss, reused as is. Phases 2 and 3 are class changes of the same actor."
+            }
+          },
+          "notes": "DD1 has four Darkest Dungeon quests; this one borrows the art and rewards of the third."
+        },
+        {
+          "id": "body_of_work",
+          "run_boss": "body",
+          "dd1_slot": "darkest_dungeon_4",
+          "name": "Body of Work",
+          "actor_ids": [
+            "boss_body_phase1", "boss_body_phase2", "boss_body_phase3", "boss_body_cherub", "boss_body_spacer", "boss_body_cherub_spacer",
+            "boss_body_failure_flg", "boss_body_failure_gr", "boss_body_failure_hel", "boss_body_failure_hwm", "boss_body_failure_jes",
+            "boss_body_failure_lep", "boss_body_failure_maa", "boss_body_failure_occ", "boss_body_failure_pd", "boss_body_failure_run",
+            "boss_body_failure_ves"
+          ],
+          "escort_actor_ids": [],
+          "tags": ["boss", "end_boss"],
+          "guards": ["end_boss_tag", "end_boss_cinematic"],
+          "dlc": null,
+          "tiers": {
+            "darkest": {
+              "config": "mountain_boss_body",
+              "config_table": null,
+              "chains_to": [],
+              "arena": "combat_arena_mountain_boss_body",
+              "arena_source": "config_override",
+              "escort_tables": [],
+              "escort_native_chain": false,
+              "escort_arena": null,
+              "boss_modifier": null,
+              "external_buffs": null,
+              "battle_modifier": null,
+              "notes": "Act 5 boss, reused as is. The config names m_endBossCinematicName EndBossVictory and the intro scene combat_intro_boss_body exists: both must be routed to the mod's own ending."
+            }
+          },
+          "notes": "Failure spectres are per hero class; the Crusader/Duelist/Abomination ones are DLC actors and only appear with those heroes."
+        }
+      ]
+    },
+    {
+      "id": "town",
+      "name": "Hamlet",
+      "dd1_art": "town",
+      "requires_quest": true,
+      "notes": "DD1's sixth dungeon: the hamlet's own streets, entered by one quest only, the Brigand Incursion (plot_town_invasion_0, difficulty 6, map maps/town_invasion_0.dm). DD1's town.dungeon.json says requires_quest_to_display: the Estate Map shows it only while a quest is on offer there (requires_quest). DD1's fights there are brigands, rabid dogs and madmen (dungeons/town/town.6.mash.darkest: 'town_incursion_weak_*' in the streets, 'town_incursion_0*' in the squares); DD2's pillagers and rabid dogs stand for them, in the burning city's arenas.",
+      "confession": {"act": "lungs", "reason": "Resentment come to the door: the men he hired and never paid take their wages from the hamlet."},
+      "unlock": {"quests_completed": 0, "requires": []},
+      "factions": [
+        {"id": "pillager", "weight": 4, "lore": "Vvulf's raiders: every deserter and cutthroat of the Old Road under one banner, with powder enough to level the hamlet."},
+        {"id": "beast", "weight": 1, "lore": "The dogs they loose ahead of them."}
+      ],
+      "arenas": {
+        "hallway": ["combat_arena_city_pillager", "combat_arena_city_faction"],
+        "room": ["combat_arena_city_military", "combat_arena_city_resist", "combat_arena_city_inn_defense"]
+      },
+      "tiers": {
+        "darkest": {
+          "ordain": null,
+          "hallway": {
+            "configs": ["jaws_and_paws"],
+            "tables": ["pillager_mashes_normal"],
+            "weights": {"pillager_mashes_normal": 180, "jaws_and_paws": 40}
+          },
+          "room": {
+            "configs": ["jaws_and_paws_c"],
+            "tables": ["pillager_mashes_hard"],
+            "weights": {"pillager_mashes_hard": 180, "jaws_and_paws_c": 40}
+          }
+        }
+      },
+      "bosses": [
+        {
+          "id": "vvulf",
+          "dd1_slot": "brigand_sapper",
+          "dd1_quest": "plot_town_invasion_0",
+          "name": "Brigand Vvulf",
+          "actor_ids": ["shared_warlord"],
+          "escort_actor_ids": ["shared_barricade_spearman", "shared_barricade_swordsman", "shared_barricade_cover2"],
+          "tags": ["boss"],
+          "guards": [],
+          "dlc": "dlc_dul_cru",
+          "tiers": {
+            "darkest": {
+              "config": null,
+              "config_table": "warlord_hard",
+              "chains_to": [],
+              "arena": "combat_arena_city_warlord",
+              "arena_source": "mod",
+              "escort_tables": [],
+              "escort_native_chain": false,
+              "escort_arena": null,
+              "boss_modifier": null,
+              "external_buffs": null,
+              "battle_modifier": null,
+              "fallbacks": [
+                {"config_table": "pillager_mashes_antiq", "arena": "combat_arena_city_pillager"},
+                {"config_table": "pillager_mashes_hard", "arena": "combat_arena_city_pillager"}
+              ],
+              "notes": "DD1's Vvulf (brigand_sapper_D with his barrel of bombs) is stood in by DD2's Warlord behind his barricade (The Binding Blade), in the city's warlord arena. 'fallbacks' are tried in order when the fight cannot be played (the DLC is not owned): the Antiquarian with her pillager guard, then a hard pillager fight."
+            }
+          },
+          "notes": "The Brigand Incursion's boss. DD1 pays T x2 (monsters/brigand_sapper_D: the block's own 'boss') and the quest pays Vvulf's Tassel, a trophy: the Warlord's own trinket table stands for it (Trinkets.BossTables)."
+        }
+      ]
+    }
+  ],
+  "wandering": [
+    {
+      "id": "collector",
+      "dd1_slot": "collector",
+      "name": "The Collector",
+      "actor_ids": ["shared_collector", "shared_collector_head_hwy", "shared_collector_head_maa", "shared_collector_head_ves"],
+      "escort_actor_ids": [],
+      "tags": ["boss"],
+      "guards": [],
+      "dlc": null,
+      "dungeons": ["crypts", "weald", "warrens", "cove"],
+      "trigger": {
+        "type": "inventory_fill",
+        "threshold": 0.79,
+        "where": "hallway",
+        "chance": {"apprentice": 0.03, "veteran": 0.04, "champion": 0.05},
+        "limit_per_quest": 1
+      },
+      "lore": "He came for the Ancestor's cabinet of curiosities and stayed for whoever carries the most out of it.",
+      "tiers": {
+        "apprentice": {
+          "config": "collector_region_1",
+          "config_table": null,
+          "chains_to": [],
+          "arena": null,
+          "arena_source": "dungeon"
+        },
+        "veteran": {
+          "config": "collector_region_2",
+          "config_table": null,
+          "chains_to": [],
+          "arena": null,
+          "arena_source": "dungeon"
+        },
+        "champion": {
+          "config": "collector_region_3",
+          "config_table": null,
+          "chains_to": [],
+          "arena": null,
+          "arena_source": "dungeon"
+        }
+      },
+      "notes": "DD1 rule kept (hallway roll once the inventory is nearly full). Vanilla DD2 gates him on an equipped trophy instead; collector_region_1/2/3 are the same fight, picked by region index or Kingdoms escalation."
+    },
+    {
+      "id": "shambler",
+      "dd1_slot": "shambler",
+      "name": "The Shambler",
+      "actor_ids": ["shared_shambler", "shared_shambler_tentacle"],
+      "escort_actor_ids": [],
+      "tags": ["boss"],
+      "guards": [],
+      "dlc": null,
+      "dungeons": ["crypts", "weald", "warrens", "cove"],
+      "trigger": {
+        "type": "darkness_or_altar",
+        "torch_max": 0,
+        "where": "hallway",
+        "chance": {"apprentice": 0.01, "veteran": 0.08, "champion": 0.12},
+        "curio": "shamblers_altar",
+        "limit_per_quest": 1
+      },
+      "lore": "It was here before the house and waits wherever the light is let die.",
+      "tiers": {
+        "apprentice": {
+          "config": "shambler",
+          "config_table": null,
+          "chains_to": [],
+          "arena": "combat_arena_hero_story_occultist_origin_2",
+          "arena_source": "config_override"
+        },
+        "veteran": {
+          "config": "shambler",
+          "config_table": null,
+          "chains_to": [],
+          "arena": "combat_arena_hero_story_occultist_origin_2",
+          "arena_source": "config_override"
+        },
+        "champion": {
+          "config": "shambler",
+          "config_table": null,
+          "chains_to": [],
+          "arena": "combat_arena_hero_story_occultist_origin_2",
+          "arena_source": "config_override"
+        }
+      },
+      "notes": "One config for every tier (scale it with the tier's ordain row: the actor has the blessing tags). The config forces the Stress Realm arena, sets the DD2 torch to 1 (actorless effect torch_set_to_1) and shuffles the party (move_shuffle_shambler_start)."
+    },
+    {
+      "id": "death",
+      "dd1_slot": null,
+      "name": "Death",
+      "actor_ids": ["shared_death", "shared_death_headstone"],
+      "escort_actor_ids": [],
+      "tags": ["boss"],
+      "guards": [],
+      "dlc": null,
+      "dungeons": ["crypts", "weald", "warrens", "cove", "darkestdungeon"],
+      "trigger": {
+        "type": "native_hook_or_deaths_door",
+        "native_table": "death_mashes",
+        "native_conditions": "hero_party_has_flagellant + is_kingdoms + escalation_is_N",
+        "deaths_door_survived": 3,
+        "where": "after_fight",
+        "limit_per_quest": 1
+      },
+      "lore": "The estate's oldest tenant, come to collect from those who have slipped her too often.",
+      "tiers": {
+        "apprentice": {
+          "config": "death_e1",
+          "config_table": null,
+          "chains_to": [],
+          "arena": null,
+          "arena_source": "dungeon"
+        },
+        "veteran": {
+          "config": "death_e2",
+          "config_table": null,
+          "chains_to": [],
+          "arena": null,
+          "arena_source": "dungeon"
+        },
+        "champion": {
+          "config": "death_e3",
+          "config_table": null,
+          "chains_to": [],
+          "arena": null,
+          "arena_source": "dungeon"
+        },
+        "darkest": {
+          "config": "death_e3",
+          "config_table": null,
+          "chains_to": [],
+          "arena": null,
+          "arena_source": "dungeon"
+        }
+      },
+      "notes": "Most faction fights in the pools carry m_AdditionalBattleConfigurationTableId death_mashes: with a Flagellant in the party and the escalation run value set, vanilla rolls her in by itself (6 in 100). The mod may also start death_eN directly. Configs are no_retreat, m_RunLimit 1, random enemy order."
+    },
+    {
+      "id": "ancient_adversary",
+      "dd1_slot": "ancestor",
+      "name": "Ancient Adversary",
+      "actor_ids": ["shared_ancestor_statue"],
+      "escort_actor_ids": [],
+      "tags": ["boss"],
+      "guards": [],
+      "dlc": null,
+      "dungeons": ["crypts", "weald", "warrens", "cove"],
+      "trigger": {"type": "curio", "curio": "ancestor_statue", "where": "room", "limit_per_quest": 1},
+      "lore": "He raised his own likeness in every corner of the estate. Something has moved into them.",
+      "per_dungeon": {
+        "crypts": {
+          "config": "ancestor_statue_city",
+          "config_table": null,
+          "chains_to": [],
+          "arena": "combat_arena_city_creature_den",
+          "arena_source": "config_override"
+        },
+        "weald": {
+          "config": "ancestor_statue_forest",
+          "config_table": null,
+          "chains_to": [],
+          "arena": "combat_arena_forest_creature_den",
+          "arena_source": "config_override"
+        },
+        "warrens": {
+          "config": "ancestor_statue_cave",
+          "config_table": null,
+          "chains_to": [],
+          "arena": "combat_arena_caves_creature_den",
+          "arena_source": "config_override"
+        },
+        "cove": {
+          "config": "ancestor_statue_coast",
+          "config_table": null,
+          "chains_to": [],
+          "arena": "combat_arena_coast_creature_den",
+          "arena_source": "config_override"
+        }
+      },
+      "notes": "One 225 HP statue, m_RoundLimit 6 (the fight ends after six rounds). Each region config forces that region's creature-den arena."
+    },
+    {
+      "id": "chirurgeon",
+      "dd1_slot": null,
+      "name": "The Chirurgeon",
+      "actor_ids": ["shared_lost_soul_chirurgeon"],
+      "escort_actor_ids": ["shared_lost_soul_patient", "shared_lost_soul", "shared_lost_soul_urchin", "shared_lost_soul_widow", "shared_lost_soul_yeoman", "shared_ghoul"],
+      "tags": ["boss"],
+      "guards": [],
+      "dlc": null,
+      "dungeons": ["warrens"],
+      "trigger": {"type": "named_room", "chance": 0.15, "limit_per_quest": 1},
+      "lore": "The estate's physician, set to cutting the failures apart. He never stopped, and he has run short of failures.",
+      "tiers": {
+        "apprentice": {
+          "config": null,
+          "config_table": null,
+          "configs": [
+            "surgeon_gaunt_101a", "surgeon_gaunt_102a", "surgeon_gaunt_103a", "surgeon_gaunt_104a", "surgeon_gaunt_101b",
+            "surgeon_gaunt_102b", "surgeon_gaunt_103b", "surgeon_gaunt_104b", "surgeon_gaunt_105b"
+          ],
+          "chains_to": ["surgeon_node_mashes_a", "surgeon_node_mashes_b"],
+          "arena": "combat_arena_caves_gaunt_chirurgeon",
+          "arena_source": "mod"
+        },
+        "veteran": {
+          "config": null,
+          "config_table": null,
+          "configs": [
+            "surgeon_gaunt_101a", "surgeon_gaunt_102a", "surgeon_gaunt_103a", "surgeon_gaunt_104a", "surgeon_gaunt_101b",
+            "surgeon_gaunt_102b", "surgeon_gaunt_103b", "surgeon_gaunt_104b", "surgeon_gaunt_105b"
+          ],
+          "chains_to": ["surgeon_node_mashes_a", "surgeon_node_mashes_b"],
+          "arena": "combat_arena_caves_gaunt_chirurgeon",
+          "arena_source": "mod"
+        },
+        "champion": {
+          "config": null,
+          "config_table": null,
+          "configs": [
+            "surgeon_gaunt_101a", "surgeon_gaunt_102a", "surgeon_gaunt_103a", "surgeon_gaunt_104a", "surgeon_gaunt_101b",
+            "surgeon_gaunt_102b", "surgeon_gaunt_103b", "surgeon_gaunt_104b", "surgeon_gaunt_105b"
+          ],
+          "chains_to": ["surgeon_node_mashes_a", "surgeon_node_mashes_b"],
+          "arena": "combat_arena_caves_gaunt_chirurgeon",
+          "arena_source": "mod"
+        }
+      },
+      "notes": "Vanilla two-wave fight: a patient wave whose additional table (surgeon_node_mashes_a/b) brings the Chirurgeon. Intended chain."
+    },
+    {
+      "id": "antiquarian",
+      "dd1_slot": null,
+      "name": "The Antiquarian",
+      "actor_ids": ["shared_pillager_antiquarian"],
+      "escort_actor_ids": ["shared_pillager_melee", "shared_pillager_ranged", "shared_pillager_mongrel", "shared_pillager_firemouth"],
+      "tags": ["boss"],
+      "guards": [],
+      "dlc": null,
+      "dungeons": ["weald"],
+      "trigger": {
+        "type": "inventory_fill",
+        "threshold": 0.7,
+        "where": "hallway",
+        "chance": {"apprentice": 0.05, "veteran": 0.05, "champion": 0.05},
+        "limit_per_quest": 1
+      },
+      "lore": "Hired to appraise the heirlooms; she now shows the pillagers which crates are worth the carrying.",
+      "tiers": {
+        "apprentice": {
+          "config": null,
+          "config_table": "pillager_mashes_antiq",
+          "chains_to": [],
+          "arena": null,
+          "arena_source": "dungeon"
+        },
+        "veteran": {
+          "config": null,
+          "config_table": "pillager_mashes_antiq",
+          "chains_to": [],
+          "arena": null,
+          "arena_source": "dungeon"
+        },
+        "champion": {
+          "config": null,
+          "config_table": "pillager_mashes_antiq",
+          "chains_to": [],
+          "arena": null,
+          "arena_source": "dungeon"
+        }
+      },
+      "notes": "Vanilla uses the same idea (condition antiq_inventory_threshold: inventory at least 70% full). 25 HP mini-boss with a pillager guard."
+    },
+    {
+      "id": "exemplar_successor",
+      "dd1_slot": null,
+      "name": "The Exemplar",
+      "actor_ids": ["cultist_exemplar", "cultist_altar", "cultist_cherub", "cultist_evangelist", "cultist_herald"],
+      "escort_actor_ids": [],
+      "tags": ["boss", "biome_boss"],
+      "guards": [],
+      "dlc": null,
+      "dungeons": ["darkestdungeon"],
+      "trigger": {"type": "named_room", "chance": 0.25, "limit_per_quest": 1},
+      "lore": "Exemplar is a title, not a man. Down here there is always another to wear it.",
+      "tiers": {
+        "darkest": {
+          "config": null,
+          "config_table": "cultist_guardian_biome_3_boss",
+          "chains_to": [],
+          "arena": null,
+          "arena_source": "dungeon"
+        }
+      },
+      "notes": "The region-3 cultist guardian fight (Exemplar + altar), no_retreat."
+    },
+    {
+      "id": "warlord",
+      "dd1_slot": "brigand_vvulf",
+      "name": "The Warlord",
+      "actor_ids": ["shared_warlord"],
+      "escort_actor_ids": ["shared_barricade_spearman", "shared_barricade_swordsman", "shared_barricade_cover2"],
+      "tags": ["boss"],
+      "guards": [],
+      "dlc": "dlc_dul_cru",
+      "dungeons": ["weald"],
+      "trigger": {"type": "named_room", "chance": 0.15, "limit_per_quest": 1},
+      "lore": "The Battalion's last living officer, still levying the Old Road toll for a paymaster long dead.",
+      "tiers": {
+        "apprentice": {
+          "config": null,
+          "config_table": "warlord_easy",
+          "chains_to": [],
+          "arena": "combat_arena_forest_warlord",
+          "arena_source": "mod"
+        },
+        "veteran": {
+          "config": null,
+          "config_table": "warlord_easy",
+          "chains_to": [],
+          "arena": "combat_arena_forest_warlord",
+          "arena_source": "mod"
+        },
+        "champion": {
+          "config": null,
+          "config_table": "warlord_hard",
+          "chains_to": [],
+          "arena": "combat_arena_forest_warlord",
+          "arena_source": "mod"
+        }
+      },
+      "notes": "Optional extra, needs The Binding Blade. Spearmen, swordsmen and barricades are base-game actors; the Warlord, his fights and his arenas are DLC."
+    },
+    {
+      "id": "shrieker",
+      "dd1_slot": "crow",
+      "name": "The Shrieker",
+      "actor_ids": ["shared_carrion_eater", "shared_carrion_eater_mutated"],
+      "escort_actor_ids": ["shared_dog_rabid_b"],
+      "tags": [],
+      "guards": [],
+      "dlc": null,
+      "dungeons": ["weald"],
+      "trigger": {"type": "quest", "quests": ["plot_trinket_retention_0", "plot_trinket_retention_1", "plot_trinket_retention_2", "plot_crow_trinket"], "rounds": "DD1: monsters/crow, raid/ai crow_A"},
+      "lore": "It nests above the Weald on what the dead no longer need, and now and then on what the living still do.",
+      "tiers": {
+        "apprentice": {
+          "config": "carrion_my_wayward_son",
+          "config_table": null,
+          "chains_to": [],
+          "arena": "combat_arena_forest_creature_den",
+          "arena_source": "mod"
+        },
+        "veteran": {
+          "config": "carrion_my_wayward_son_2",
+          "config_table": null,
+          "chains_to": [],
+          "arena": "combat_arena_forest_creature_den",
+          "arena_source": "mod"
+        },
+        "champion": {
+          "config": "carrion_my_wayward_son_c",
+          "config_table": null,
+          "chains_to": [],
+          "arena": "combat_arena_forest_creature_den",
+          "arena_source": "mod"
+        }
+      },
+      "notes": "DD2 has no Shrieker (only a stagecoach pet of that name). The fight at its perch (DD1: crow_A/B/C with its nest, maps/crow_map1.dm) is stood in by DD2's carrion eaters at their den in the forest, one fight per tier. DD1's rule that the Shrieker is gone after four rounds is the mod's to keep (Estate/Shrieker.cs ends the fight as the fifth round begins); the nest's loot (NEST_A/B/C) is paid only for a fight won outright. It is no wanderer of the roll: the trigger type 'quest' keeps it out of DungeonContent.WandererFallback."
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>DD2Estate</AssemblyName>
+    <RootNamespace>DD2Estate</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <Version>0.1.0</Version>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <DebugType>portable</DebugType>
+    <!-- game assemblies are referenced from the user's install, never copied or shipped -->
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <NoWarn>$(NoWarn);CS0436;MSB3277</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="$(BepInExDir)\core\BepInEx.dll" Private="false" />
+    <Reference Include="$(BepInExDir)\core\0Harmony.dll" Private="false" />
+    <Reference Include="$(ManagedDir)\IronCrown.dll" Private="false" />
+    <Reference Include="$(ManagedDir)\Assembly-CSharp.dll" Private="false" />
+    <Reference Include="$(ManagedDir)\RedExternal.dll" Private="false" />
+    <Reference Include="$(ManagedDir)\LoadingSequencer.dll" Private="false" />
+    <Reference Include="$(ManagedDir)\Newtonsoft.Json.dll" Private="false" />
+    <Reference Include="$(ManagedDir)\FMODUnity.dll" Private="false" />
+    <Reference Include="$(ManagedDir)\Cinemachine.dll" Private="false" />
+    <Reference Include="$(ManagedDir)\Unity.RenderPipelines.Core.Runtime.dll" Private="false" />
+    <Reference Include="$(ManagedDir)\Unity.RenderPipelines.Universal.Runtime.dll" Private="false" />
+    <Reference Include="$(ManagedDir)\Unity.TextMeshPro.dll" Private="false" />
+    <Reference Include="$(ManagedDir)\Unity.Addressables.dll" Private="false" />
+    <Reference Include="$(ManagedDir)\Unity.ResourceManager.dll" Private="false" />
+    <Reference Include="$(ManagedDir)\Unity.InputSystem.dll" Private="false" />
+    <Reference Include="$(ManagedDir)\UnityEngine.dll" Private="false" />
+    <Reference Include="$(ManagedDir)\UnityEngine.*Module.dll" Private="false" />
+    <Reference Include="$(ManagedDir)\UnityEngine.UI.dll" Private="false" />
+  </ItemGroup>
+
+  <!-- content tables travel inside the DLL -->
+  <ItemGroup>
+    <EmbeddedResource Include="Data\*.json" LogicalName="DD2Estate.Data.%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <!-- -p:SkipCore=true leaves Core\ out while it is being reworked and nothing else depends on it yet -->
+  <ItemGroup Condition="'$(SkipCore)' == 'true'">
+    <Compile Remove="Core\**" />
+  </ItemGroup>
+
+  <!-- -p:NoDeploy=true builds without copying into the game (the DLL is locked while the game runs) -->
+  <Target Name="DeployPlugin" AfterTargets="Build" Condition="Exists('$(BepInExDir)') And '$(NoDeploy)' != 'true'">
+    <MakeDir Directories="$(PluginDeployDir)" />
+    <Copy SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb" DestinationFolder="$(PluginDeployDir)" SkipUnchangedFiles="true" />
+    <!-- pictures that take the place of DD1's (Dd1Install.OverrideRoot): the repository's assets\ folder, if there is one,
+         goes beside the plugin. A picture taken out of assets\ stays in the game's folder until it is deleted there. -->
+    <ItemGroup>
+      <ArtOverride Include="$(MSBuildThisFileDirectory)..\..\assets\**\*.png" />
+    </ItemGroup>
+    <Copy SourceFiles="@(ArtOverride)" DestinationFiles="@(ArtOverride->'$(PluginDeployDir)\assets\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+    <Message Importance="high" Text="Deployed $(TargetFileName) -> $(PluginDeployDir)" />
+  </Target>
+
+</Project>
